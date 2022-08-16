@@ -41,6 +41,7 @@ app.post("/", function(req, res){
 
   //for posting the data
   const request = https.request(url, options, function(response){
+    console.log(response.statusCode);
     if(response.statusCode == 200){
       res.sendFile(__dirname + "/success.html");
     }
@@ -49,6 +50,7 @@ app.post("/", function(req, res){
     }
 
   });
+
   request.write(jsonData)
   request.end();
 });
@@ -57,6 +59,6 @@ app.post("/failure", function(req, res){
   res.redirect("/");
 })
 
-app.listen(3000, function(res, req){
+app.listen(process.env.PORT || 3000, function(res, req){
   console.log("server is runnig on port 3000...");
 });
